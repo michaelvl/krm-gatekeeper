@@ -55,6 +55,7 @@ func (gator *GatorTest) Process(resourceList *framework.ResourceList) error {
 		return err
 	}
 
+	var errorsFound = 0
 	for _, result := range responses.Results() {
 		res := framework.Result{
 			Message: fmt.Sprintf("%s violatedConstraint: %s", result.Msg, result.Constraint.GetName()),
@@ -76,11 +77,15 @@ func (gator *GatorTest) Process(resourceList *framework.ResourceList) error {
 			res.Severity = framework.Warning
 		default:
 			res.Severity = framework.Error
+			errorsFound++
 		}
 		results = append(results, &res)
 	}
 
 	resourceList.Results = results
+	if errorsFound > 0 {
+		return results
+	}
 	return nil
 }
 
