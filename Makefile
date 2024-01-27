@@ -2,6 +2,10 @@
 build:
 	go build -o gatekeeper gator.go
 
+.PHONY: lint
+lint:
+	docker run --rm -v $$(pwd):/app -w /app golangci/golangci-lint:v1.55.2 golangci-lint run -v  --timeout 10m
+
 .PHONY: container
 container:
 	docker build -t github.com/michaelvl/krm-gatekeeper:latest .

@@ -18,18 +18,16 @@ import (
 	"fmt"
 	"os"
 
-	//"github.com/GoogleContainerTools/kpt-functions-sdk/go/fn"
+	gatortest "github.com/open-policy-agent/gatekeeper/v3/pkg/gator/test"
+	gatekeeperutil "github.com/open-policy-agent/gatekeeper/v3/pkg/util"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	"sigs.k8s.io/kustomize/kyaml/fn/framework"
 	"sigs.k8s.io/kustomize/kyaml/fn/framework/command"
-	//"sigs.k8s.io/kustomize/kyaml/kio"
-	k8syaml "sigs.k8s.io/yaml"
 	"sigs.k8s.io/kustomize/kyaml/yaml"
-	gatortest "github.com/open-policy-agent/gatekeeper/v3/pkg/gator/test"
-	gatekeeperutil "github.com/open-policy-agent/gatekeeper/v3/pkg/util"
+	k8syaml "sigs.k8s.io/yaml"
 )
 
-type GatorTest struct {}
+type GatorTest struct{}
 
 func (gator *GatorTest) Process(resourceList *framework.ResourceList) error {
 	var results framework.Results
@@ -71,7 +69,7 @@ func (gator *GatorTest) Process(resourceList *framework.ResourceList) error {
 				},
 			},
 		}
-		switch (result.EnforcementAction) {
+		switch result.EnforcementAction {
 		case string(gatekeeperutil.Dryrun):
 			res.Severity = framework.Info
 		case string(gatekeeperutil.Warn):
