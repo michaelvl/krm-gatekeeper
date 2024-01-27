@@ -6,7 +6,8 @@ on:
       - '*'
     branches:
       - main
-
+    paths-ignore:
+      - README.md
 jobs:
   build:
     runs-on: ubuntu-latest

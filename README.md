@@ -11,13 +11,13 @@ suport a newer variant of the Rego language and GateKeeper
 Example:
 
 ```
-kpt fn source test | kpt fn eval - --image github.com/michaelvl/krm-gatekeeper:latest | kpt fn sink tmp
+kpt fn source test | kpt fn eval - --image ghcr.io/michaelvl/krm-gatekeeper:latest | kpt fn sink tmp
 ```
 
 which will produce:
 
 ```
-[RUNNING] "github.com/michaelvl/krm-gatekeeper"
+[RUNNING] "github.com/michaelvl/krm-gatekeeper:latest"
 [PASS] "github.com/michaelvl/krm-gatekeeper:latest" in 800ms
   Results:
     [info]: gatekeeper
