@@ -13,9 +13,10 @@ container:
 .PHONY: test-bin
 test-bin:
 	rm -rf _tmp
-	kpt fn source test | ./gatekeeper
+	kpt fn source test | ./gatekeeper | tee tmp.yaml
+	grep -q 'Implied by expand-deployments] All pods must have an `owner` label violatedConstraint: must-have-owner' tmp.yaml
 
 .PHONY: test-container
 test-container:
 	rm -rf _tmp
-	kpt fn source test | kpt fn eval - --image github.com/michaelvl/krm-gatekeeper:latest | kpt fn sink _tmp
+	kpt fn source test | kpt fn eval - --image ghcr.io/michaelvl/krm-gatekeeper:latest | kpt fn sink _tmp

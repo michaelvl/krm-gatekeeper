@@ -22,4 +22,4 @@ jobs:
 
       - name: Lint
         run: |
-          make build lint container
+          make build test-bin lint container
