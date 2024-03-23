@@ -8,7 +8,7 @@ lint:
 
 .PHONY: container
 container:
-	docker build -t github.com/michaelvl/krm-gatekeeper:latest .
+	docker build -t github.com/krm-functions/gatekeeper:latest .
 
 .PHONY: test-bin
 test-bin:
@@ -19,4 +19,4 @@ test-bin:
 .PHONY: test-container
 test-container:
 	rm -rf _tmp
-	kpt fn source test | kpt fn eval - --image ghcr.io/michaelvl/krm-gatekeeper:latest | kpt fn sink _tmp
+	kpt fn source test | kpt fn eval - --image ghcr.io/krm-functions/gatekeeper:latest | kpt fn sink _tmp

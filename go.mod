@@ -1,4 +1,4 @@
-module github.com/michaelvl/krm-gatekeeper
+module github.com/krm-functions/gatekeeper
 
 go 1.21.2
 
