@@ -3,7 +3,7 @@ module github.com/krm-functions/gatekeeper
 go 1.21.2
 
 require (
-	github.com/open-policy-agent/gatekeeper/v3 v3.15.0
+	github.com/open-policy-agent/gatekeeper/v3 v3.15.1
 	k8s.io/apimachinery v0.29.3
 	sigs.k8s.io/kustomize/kyaml v0.16.0
 	sigs.k8s.io/yaml v1.4.0
