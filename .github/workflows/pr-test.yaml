@@ -28,4 +28,4 @@ jobs:
 
       - name: Build and test
         run: |
-          make build test-bin lint container
+          make build test-bin lint container test-container
