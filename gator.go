@@ -94,7 +94,6 @@ func main() {
 	cmd := command.Build(&gator, command.StandaloneEnabled, false)
 
 	if err := cmd.Execute(); err != nil {
-		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
 }

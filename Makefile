@@ -8,15 +8,20 @@ lint:
 
 .PHONY: container
 container:
-	docker build -t github.com/krm-functions/gatekeeper:latest .
+	docker build -t ghcr.io/krm-functions/gatekeeper:latest .
 
 .PHONY: test-bin
 test-bin:
-	rm -rf _tmp
-	kpt fn source test | ./gatekeeper | tee tmp.yaml
-	grep -q 'Implied by expand-deployments] All pods must have an `owner` label violatedConstraint: must-have-owner' tmp.yaml
+	rm -rf _tmp _results && mkdir _results
+	kpt fn source test | ./gatekeeper | tee _results/results.yaml
+	make do-tests
 
 .PHONY: test-container
 test-container:
-	rm -rf _tmp
-	kpt fn source test | kpt fn eval - --image ghcr.io/krm-functions/gatekeeper:latest | kpt fn sink _tmp
+	rm -rf _tmp _results
+	kpt fn source test | kpt fn eval --results-dir _results - --image ghcr.io/krm-functions/gatekeeper:latest | kpt fn sink _tmp
+	make do-tests
+
+.PHONY: do-tests
+do-tests:
+	grep -q 'Implied by expand-deployments] All pods must have an `owner` label violatedConstraint: must-have-owner' _results/results.yaml
