@@ -6,7 +6,7 @@ toolchain go1.22.2
 
 require (
 	github.com/open-policy-agent/gatekeeper/v3 v3.16.3
-	k8s.io/apimachinery v0.30.1
+	k8s.io/apimachinery v0.30.2
 	sigs.k8s.io/kustomize/kyaml v0.17.1
 	sigs.k8s.io/yaml v1.4.0
 )
