@@ -9,7 +9,7 @@ This function support the newer variants of the Rego language and GateKeeper
 Example:
 
 ```
-kpt fn source test | kpt fn eval - --image ghcr.io/krm-functions/gatekeeper:latest | kpt fn sink tmp
+kpt fn source test | kpt fn eval - --image ghcr.io/krm-functions/gatekeeper@sha256:01b927c641d14f2d6c0b5b4335e7a01596ed2cd1f3169bae4e025b9bfaa802ba
 ```
 
 which will produce:
