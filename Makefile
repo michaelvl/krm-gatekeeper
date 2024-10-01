@@ -4,7 +4,7 @@ build:
 
 .PHONY: lint
 lint:
-	docker run --rm -v $$(pwd):/app -w /app golangci/golangci-lint:v1.59.0 golangci-lint run -v  --timeout 10m
+	docker run --rm -v $$(pwd):/app -w /app golangci/golangci-lint:v1.60.3 golangci-lint run -v  --timeout 10m
 
 .PHONY: container
 container:
