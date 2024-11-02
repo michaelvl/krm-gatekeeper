@@ -4,7 +4,7 @@ go 1.23.1
 
 require (
 	github.com/open-policy-agent/gatekeeper/v3 v3.17.1
-	k8s.io/apimachinery v0.31.1
+	k8s.io/apimachinery v0.31.2
 	sigs.k8s.io/kustomize/kyaml v0.18.1
 	sigs.k8s.io/yaml v1.4.0
 )
