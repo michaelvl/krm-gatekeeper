@@ -1,25 +1,31 @@
+KO_DOCKER_REPO ?= ko.local
+GATEKEEPER ?= ./gatekeeper
+GATEKEEPER_IMAGE ?= $(KO_DOCKER_REPO)/gatekeeper:latest
+
+.EXPORT_ALL_VARIABLES:
+
 .PHONY: build
 build:
 	go build -o gatekeeper gator.go
 
 .PHONY: lint
 lint:
-	docker run --rm -v $$(pwd):/app -w /app golangci/golangci-lint:v1.60.3 golangci-lint run -v  --timeout 10m
+	golangci-lint run -v  --timeout 10m
 
 .PHONY: container
 container:
-	docker build -t ghcr.io/krm-functions/gatekeeper:latest .
+	ko build --base-import-paths	
 
 .PHONY: test-bin
 test-bin:
-	rm -rf _tmp _results && mkdir _results
-	kpt fn source test | ./gatekeeper | tee _results/results.yaml
+	rm -rf _tmp _results
+	kpt fn source examples | kpt fn eval --results-dir _results - --truncate-output=false --exec $(GATEKEEPER) | kpt fn sink _tmp
 	make do-tests
 
 .PHONY: test-container
 test-container:
 	rm -rf _tmp _results
-	kpt fn source test | kpt fn eval --results-dir _results - --image ghcr.io/krm-functions/gatekeeper:latest | kpt fn sink _tmp
+	kpt fn source examples | kpt fn eval --results-dir _results - --image $(GATEKEEPER_IMAGE) | kpt fn sink _tmp
 	make do-tests
 
 .PHONY: do-tests

@@ -1,0 +1,4 @@
+builds:
+  - id: main
+    main: ./gator.go
+
